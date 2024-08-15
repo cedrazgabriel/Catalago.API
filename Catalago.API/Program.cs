@@ -12,6 +12,11 @@ builder.Services.AddSwaggerGen();
 
 string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 
+if (mySqlConnection == null)
+{
+    throw new Exception("String de conexão não definida no appsettings.json");
+}
+
 Console.WriteLine(mySqlConnection);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
