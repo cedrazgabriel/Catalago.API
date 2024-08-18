@@ -1,6 +1,7 @@
 ﻿using Catalago.API.Context;
 using Catalago.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalago.API.Controllers
 {
@@ -18,7 +19,7 @@ namespace Catalago.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetProducts()
         { 
-            var products = _context.Products.ToList();
+            var products = _context.Products.AsNoTracking().ToList();
 
             if(products is null)
             {
@@ -31,7 +32,7 @@ namespace Catalago.API.Controllers
         [HttpGet("{id:int}", Name = "GetProduct")]
         public ActionResult<Product> GetProduct(int id)
         {
-            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            var product = _context.Products.AsNoTracking().FirstOrDefault(p => p.Id == id);
 
             if (product is null)
             {

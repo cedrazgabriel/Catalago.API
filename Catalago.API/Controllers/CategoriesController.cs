@@ -13,7 +13,7 @@ namespace Catalago.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Category>> GetCategories()
         {
-            var categories = context.Categories.ToList();
+            var categories = context.Categories.AsNoTracking().ToList();
 
             if (categories is null)
             {
@@ -26,13 +26,13 @@ namespace Catalago.API.Controllers
         [HttpGet("products")]
         public ActionResult<IEnumerable<Category>> GetCategoriesProducts()
         {
-            return context.Categories.Include(p => p.Products).ToList();
+            return context.Categories.AsNoTracking().Include(p => p.Products).ToList();
         }
 
         [HttpGet("{id:int}", Name = "GetCategories")]
         public ActionResult<Category> GetCategories(int id)
         {
-            var category = context.Categories.FirstOrDefault(c => c.Id == id);
+            var category = context.Categories.AsNoTracking().FirstOrDefault(c => c.Id == id);
 
             if (category is null)
             {

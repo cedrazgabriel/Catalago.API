@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Catalago.API.Models;
 
@@ -37,5 +38,6 @@ public class Product
     [Column("category_id")]
     public int CategoryId { get; set; }
 
+    [JsonIgnore]
     public Category? Category { get; set; }
 }
