@@ -6,11 +6,11 @@ namespace Catalago.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ProdutosController : ControllerBase
+    public class ProductsController : ControllerBase
     {
       private readonly AppDbContext _context;
 
-        public ProdutosController(AppDbContext context)
+        public ProductsController(AppDbContext context)
         {
             _context = context;
         }
