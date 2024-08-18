@@ -74,5 +74,21 @@ namespace Catalago.API.Controllers
             
             return Ok("Product updated");
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product is null)
+            {
+                return NotFound("Product not found");
+            }
+
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
