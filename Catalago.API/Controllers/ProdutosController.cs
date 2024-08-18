@@ -28,7 +28,7 @@ namespace Catalago.API.Controllers
             return products;
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetProduct")]
         public ActionResult<Product> GetProduct(int id)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
@@ -39,6 +39,21 @@ namespace Catalago.API.Controllers
             }
 
             return product;
+        }
+
+        [HttpPost]
+        public ActionResult Post(Product product)
+        {
+            if (product is null) {
+                return BadRequest();
+            
+            }
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return new CreatedAtRouteResult("GetProduct",
+                new {id = product.Id},
+                product);
         }
     }
 }
