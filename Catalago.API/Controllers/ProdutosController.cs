@@ -55,5 +55,24 @@ namespace Catalago.API.Controllers
                 new {id = product.Id},
                 product);
         }
+
+        [HttpPut("{id:int}")]
+        public ActionResult Put(int id, Product product)
+        {
+            if (id != product.Id)
+            {
+                return BadRequest();
+            }
+
+            if (product is null)
+            {
+                return BadRequest();
+            }
+
+           _context.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+           _context.SaveChanges();
+            
+            return Ok("Product updated");
+        }
     }
 }
