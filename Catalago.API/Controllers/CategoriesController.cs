@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Catalago.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CategoriesController(AppDbContext context) : ControllerBase
     {
